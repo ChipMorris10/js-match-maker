@@ -19,18 +19,18 @@ while (studentPhoneNo.length != 12 || studentPhoneNo.charAt(3) != "-" || student
   var studentPhoneNo = prompt("What is the student's phone number? (xxx-xxx-xxxx");
 }
 
-    var studentCity = prompt("What city does the student live in?");
-    var studentInfo = {name: studentName, number: studentPhoneNo, city:studentCity};
+  var studentCity = prompt("What city does the student live in?");
+  var studentInfo = {name: studentName, number: studentPhoneNo, city:studentCity};
 
-    totalStudents.push(studentInfo);
-    }
+  totalStudents.push(studentInfo);
+}
 
+for (var i = 0; i < totalStudents.length; i ++) {
 
+alert(" Name: " + totalStudents[i].name + " \n Phone: " + totalStudents[i].number + "\n City: " + totalStudents[i].city.toUpperCase());
 
-
-
-
-
+}
+console.log(totalStudents);
 
 
 
