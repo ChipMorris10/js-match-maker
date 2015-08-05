@@ -6,6 +6,11 @@
 // need to turn numStudents into an integer
 var numStudents = parseInt(prompt("How many students are learning JavaScript?"));
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
 // create empty array for totalStudents
 // collect studentName, studentPhone, studentCity
 var totalStudents = [];
@@ -27,7 +32,7 @@ while (studentPhoneNo.length != 12 || studentPhoneNo.charAt(3) != "-" || student
 
 for (var i = 0; i < totalStudents.length; i ++) {
 
-alert(" Name: " + totalStudents[i].name + " \n Phone: " + totalStudents[i].number + "\n City: " + totalStudents[i].city.toUpperCase());
+  alert(" Name: " + capitalizeFirstLetter(totalStudents[i].name) + " \n Phone: " + totalStudents[i].number + "\n City: " + totalStudents[i].city.toUpperCase());
 
 }
 console.log(totalStudents);
