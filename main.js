@@ -4,38 +4,80 @@
 
 // prompt how many students learning JS
 // need to turn numStudents into an integer
-var numStudents = parseInt(prompt("How many students are learning JavaScript?"));
 
 function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+function runPrompts(type) {
 
+    var studentName = prompt("What is the " + type + "'s name? ");
+
+    var studentPhoneNo = checkPhoneNumber(type);
+
+    var studentCity = prompt("What city does the " + type + " live in?");
+
+    return {name: studentName, number: studentPhoneNo, city:studentCity};
+
+}
 // create empty array for totalStudents
 // collect studentName, studentPhone, studentCity
-var totalStudents = [];
-  for(i = 0; i < numStudents; i++){
-  var studentName = prompt("What is the student's name? ");
-  var studentPhoneNo = prompt("What is the student's phone number? (xxx-xxx-xxxx)");
+function gatherData(type) {
+  var results = [];
+  var keepGoing = true;
 
-  // while the phone number doesn't comply to format, prompt re-enter
-  while (studentPhoneNo.length != 12 || studentPhoneNo.charAt(3) != "-" || studentPhoneNo.charAt(7) != "-")  {
-    alert(" Your phone number is not valid, please re-enter your number using the format xxx-xxx-xxxx ");
-    var studentPhoneNo = prompt("What is the student's phone number? (xxx-xxx-xxxx");
+  while (keepGoing) {
+    var result = runPrompts(type);
+    results.push(result);
+    keepGoing = confirm("Would you like to continue?");
   }
 
-  var studentCity = prompt("What city does the student live in?");
-  var studentInfo = {name: studentName, number: studentPhoneNo, city:studentCity};
-
-  totalStudents.push(studentInfo);
+  return results;
 }
 
-for (var i = 0; i < totalStudents.length; i ++) {
+function validatePhoneNumber(studentPhoneNo, type) {
+    while (studentPhoneNo.length != 12 || studentPhoneNo.charAt(3) != "-" || studentPhoneNo.charAt(7) != "-")  {
+    alert(" Your phone number is not valid, please re-enter your number using the format xxx-xxx-xxxx ");
+    studentPhoneNo = prompt("What is the " + type + "'s phone number? (xxx-xxx-xxxx)");
+  }
+  return studentPhoneNo;
+}
 
-  alert(" Name: " + capitalizeFirstLetter(totalStudents[i].name) + " \n Phone: " + totalStudents[i].number + "\n City: " + totalStudents[i].city.toUpperCase());
+function checkPhoneNumber(type) {
+  var studentPhoneNo = prompt("What is the " + type + "'s phone number? (xxx-xxx-xxxx)");
+  studentPhoneNo = validatePhoneNumber(studentPhoneNo, type);
+  return studentPhoneNo;
+}
+
+function displayData(results) {
+  for (var i = 0; i < results.length; i ++) {
+
+    alert(" Name: " + capitalizeFirstLetter(results[i].name) + " \n Phone: " + results[i].number + "\n City: " + results[i].city.toUpperCase());
+
+  }
+}
+
+function promptForInformation(type) {
+  var results = gatherData(type);
+  displayData(results);
+  return results;
+}
+
+var students = promptForInformation("student");
+var mentors = promptForInformation("mentor");
+
+
+
+// console.log(totalStudents);
+
+function insertsDOM (object) {
+  var list = document.getElementById('data');
+  var li = document.createElement('li');
+  var name = document.createTextNode("name: " + object.name + ", phone: " + object.phone);
+  li.appendChild(name);
+  list.appendChild(li);
 
 }
-console.log(totalStudents);
 
 // ---------- M E N T O R S ----------
 
@@ -73,14 +115,11 @@ console.log(totalStudents);
 // console.log(totalMentors);
 
 
+function displayDOM (array) {
+  array.forEach(function(name) {
+    insertsDOM(name);
 
+  });
+}
 
-
-
-
-
-
-
-
-
-
+displayDOM(students);
